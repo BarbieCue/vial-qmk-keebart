@@ -1,21 +1,23 @@
 # 3w6 Pro – Keymap `rk` (Maus-Layer-Meldung an den Host)
 
 Basis ist die Keymap `vial` dieses Forks (Upstream: [Keebart/vial-qmk-keebart](https://github.com/Keebart/vial-qmk-keebart),
-Stand `63e2d62`). `config.h`, `rules.mk` und `vial.json` sind unverändert, in `keymap.c` ist am Ende ein Hook ergänzt:
+Stand `63e2d62`). `config.h`, `rules.mk` und `vial.json` sind unverändert,
+in `keymap.c` ist am Ende ein Hook ergänzt:
 
-- Beim **Betreten** von Layer 3 (Maus-Layer) tippt die Tastatur **Strg+Alt+Shift+Super+M**.
+- Beim **Betreten** von Layer 2 (Maus-Layer) tippt die Tastatur **Strg+Alt+Shift+Super+M**.
 - Beim **Verlassen** tippt sie **Strg+Alt+Shift+Super+N**.
 - Gerade gehaltene Modifier (auch One-Shot) werden dafür kurz entfernt und danach wiederhergestellt.
 - Gesendet wird nur von der Hälfte, die am USB hängt.
 
-Eine GNOME-Shell-Extension kann darauf hören und z. B. die obere Leiste einfärben. Die Tastenbelegung selbst
-bleibt in Vial (EEPROM); die Vial-UID ist dieselbe wie bei der Original-Keymap.
+Eine GNOME-Shell-Extension kann darauf hören und z. B. die obere Leiste einfärben. Die Tastenbelegung selbst bleibt in Vial (EEPROM); die Vial-UID ist dieselbe wie bei der Original-Keymap.
 
 ## Bauen
 
 ```bash
-git clone --recurse-submodules <dieses-repo>
+git clone --recurse-submodules https://github.com/BarbieCue/vial-qmk-keebart.git
 cd vial-qmk-keebart && git checkout vial
+# Falls bereits ohne --recurse-submodules geklont wurde:
+git submodule update --init --recursive
 
 nix shell nixpkgs#qmk nixpkgs#gcc-arm-embedded nixpkgs#gnumake nixpkgs#git
 qmk compile -kb keebart/3w6_pro -km vial    # Original-Keymap (Rückweg)
@@ -40,12 +42,11 @@ Dasselbe mit der anderen Hälfte (`3w6-rechts-original.uf2`).
 
 ## Flashen (jede Hälfte einzeln, dieselbe Datei)
 
-1. Eine Hälfte per USB anschließen.
-2. Bootloader: **BOOT** halten, kurz **RESET** drücken, **BOOT** loslassen (die zwei kleinen Löcher an der Unterseite).
-   Alternativ die äußerste Taste der oberen Reihe beim Einstecken halten.
-3. Das Laufwerk `RPI-RP2` erscheint; `3w6_pro_rk.uf2` darauf kopieren. Die Hälfte startet neu.
-4. Dasselbe mit der anderen Hälfte.
-5. Falls das Layout zurückgesetzt wurde: in Vial die gespeicherte `.vil` laden.
+1. Eine Hälfte per USB anschließen. Beim Anschließen darauf achten,
+die äußere Taste der oberen Reihe gedrückt zu halten (betritt den BOOT-Modus)
+2. Das Laufwerk `RPI-RP2` erscheint; `3w6_pro_rk.uf2` darauf kopieren. Die Hälfte startet neu.
+3. Dasselbe mit der anderen Hälfte.
+4. Falls das Layout zurückgesetzt wurde: in Vial die gespeicherte `.vil` laden.
 
 ## Zurück zur Original-Firmware
 

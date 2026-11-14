@@ -44,12 +44,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Maus-Layer an den Host melden (GNOME-Extension "Mouse Layer Indicator",
  * siehe gnome-extensions/mouse-layer-indicator).
  *
- * Beim Betreten von Layer 3 wird Strg+Alt+Shift+Super+M getippt, beim Verlassen
+ * Beim Betreten von Layer 2 wird Strg+Alt+Shift+Super+M getippt, beim Verlassen
  * Strg+Alt+Shift+Super+N. Gerade gehaltene Modifier (auch One-Shot) werden
  * dafür kurz entfernt und danach wiederhergestellt, damit am Host exakt diese
  * Kombination ankommt.
  * ------------------------------------------------------------------------ */
-#define MOUSE_LAYER      3
+#define MOUSE_LAYER      2
 #define MOUSE_LAYER_ON   C(A(S(G(KC_M))))
 #define MOUSE_LAYER_OFF  C(A(S(G(KC_N))))
 
